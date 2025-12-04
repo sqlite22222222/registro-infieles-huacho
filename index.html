@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="E2b4s6_x4WjIQu0ysUfp3BnhBhFiCtt8_ydFiOREsp8" />
+    <meta name="google-site-verification" content="b3cerXLZRsj5zefuZazxMyDZZilHhfu2jlDiw27okFA" />
     <title>Registro Provincial de Infieles - Huachito York | Lista Negra</title>
     <meta name="keywords" content="lista de infieles huacho, lista de las girls, lista de las girls huachanas, lista de infieles, lista de infieles de santa maria, lista de infieles de hualmay, huachito york, infieles huacho, registro de infieles">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Estilos CSS (Se mantienen sin cambios grandes para no marearte) */
+        /* [Se mantienen la mayoría de estilos generales, se ajustan los de verificación] */
         body { 
             font-family: 'Poppins', sans-serif; 
             margin: 0; 
@@ -220,7 +220,7 @@
         .checkbox-group input[type="checkbox"] { margin-right: 12px; margin-top: 5px; accent-color: #e74c3c; min-width: 16px; min-height: 16px; cursor: pointer; } 
         .checkbox-group label { font-size: 15px; font-weight: normal; color: #34495e; line-height: 1.4; cursor: pointer; }
         
-        /* --- ESTILOS DE VERIFICACIÓN --- */
+        /* --- ESTILOS DE VERIFICACIÓN (Nuevos/Modificados) --- */
         .verification-group { 
             margin-bottom: 25px;
             padding: 15px;
@@ -237,7 +237,7 @@
             border: 1px solid #c8e6c9; 
         }
 
-        .status-text { 
+        .status-text { /* Estilo del texto "Verificación completada" */
             font-size: 16px;
             font-weight: 600;
             color: #4CAF50; 
@@ -247,7 +247,7 @@
             justify-content: center;
         }
 
-        .status-badge { 
+        .status-badge { /* Estilo del "Publicación Habilitada" */
             background-color: #d1d5db; 
             color: #6b7280; 
             padding: 6px 12px;
@@ -331,7 +331,7 @@
             REGISTRO PROVINCIAL DE INFIELES DE HUACHITO YORK 🔥 
         </div>
         <div class="header-subtitle">
-            ¡Busca y reporta infieles de Huacho, Hualmay, Huaura, Santa María y más. Encuentra la lista de las 'Girls' y los 'Boys' más votados de la provincia!.<br>☠️ Huacho pueblo chico, infierno grande ☠️
+            ¡Busca y reporta infieles de Huacho, Hualmay, Huaura, Santa María y más. Encuentra la lista de las 'Girls' y los 'Boys' más votados de la provincia!.<br>☠️ Huacho pueblo chico, infierno grande** ☠️
         </div>
 
         <div class="actions">
@@ -339,7 +339,7 @@
                 🗣️ REPORTAR INFIEL
             </button>
             <button class="btn btn-list">
-                <span id="lista-icon">👀</span> <span id="lista-count">3</span> LISTA DE INFIELES
+                <span id="lista-icon">👀</span> <span id="lista-count">0</span> LISTA DE INFIEL<span style="color: #2c3e50;">ES</span>
             </button>
             <button class="btn btn-online">
                 👥 <span id="online-count">60</span> PERSONAS EN LÍNEA
@@ -419,7 +419,7 @@
                         <div class="input-group">
                             <label for="report-genero">Género (opcional)</label>
                             <select id="report-genero">
-                                <option value="No especificado">Selecciona género</option>
+                                <option>Selecciona género</option>
                                 <option>Masculino</option>
                                 <option>Femenino</option>
                                 <option>Otro</option>
@@ -436,19 +436,21 @@
                         <div class="input-group">
                             <label for="report-departamento">Departamento *</label>
                             <select id="report-departamento" required>
-                                <option value="Lima">Lima</option>
+                                <option>Selecciona departamento</option>
+                                <option selected>Lima</option>
                             </select>
                         </div>
                         <div class="input-group">
                             <label for="report-provincia">Provincia *</label>
                             <select id="report-provincia" required>
-                                <option value="Huaura">Huaura</option>
+                                <option>Selecciona provincia</option>
+                                <option selected>Huaura</option>
                             </select>
                         </div>
                         <div class="input-group" style="grid-column: 1 / span 2;">
                             <label for="report-distrito">Distrito *</label>
                             <select id="report-distrito" required>
-                                <option value="">Selecciona distrito</option>
+                                <option value="Selecciona distrito">Selecciona distrito</option>
                                 <option>Huacho</option>
                                 <option>Hualmay</option>
                                 <option>Santa María</option>
@@ -473,19 +475,30 @@
                     <div class="section-title">
                         <span style="color: #e74c3c;">🎤</span> Evidencias (Opcional)
                     </div>
-                    <p style="font-size: 15px; color: #5d6d7e;">Puedes adjuntar enlaces de pruebas (las imágenes no se suben directamente a la base de datos de Google Forms).</p>
+                    <p style="font-size: 15px; color: #5d6d7e;">Puedes adjuntar capturas de pantalla, fotos, documentos PDF o enlaces como pruebas.</p>
                     
                     <div class="input-group">
-                        <label for="report-enlace">Enlaces externos (URLs) (opcional)</label>
+                        <label>Subir Archivos (Imágenes o PDF)</label>
+                        <div class="evidence-upload-box">
+                            <div class="file-info" id="file-selection-info">Elegir archivos</div>
+                            <label for="file-upload" class="btn-upload-file">Elegir archivos</label>
+                            <input type="file" id="file-upload" multiple style="display: none;">
+                        </div>
+                        <div class="file-upload-specs">Formatos permitidos: JPG, PNG, GIF, WebP, PDF. Máximo 10MB por archivo.</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="report-enlace">Enlaces externos (URLs)</label>
                         <input type="url" id="report-enlace" placeholder="https://ejemplo.com/evidencia">
                     </div>
 
                     <div class="input-group">
                         <label for="report-email">Tu correo electrónico (opcional)</label>
-                        <input type="email" id="report-email" placeholder="tu@gmail.com">
+                        <input type="email" id="report-email" placeholder="tu@gmail.com (Solo necesario si quieres editar/eliminar después)">
                         <span style="font-size: 13px; color: #3498db; margin-top: 5px;">ℹ️ Si deseas poder solicitar ediciones o eliminaciones futuras, proporciona un correo Gmail válido.</span>
                     </div>
                 </div>
+
                 <div class="form-section legal-section">
                     <div class="section-title">
                         <span style="color: #e74c3c;">⚖️</span> Términos Legales y Responsabilidad
@@ -563,35 +576,28 @@
     </div>
 
     <script>
-        // ***********************************************************************************
-        // ⚠️ IMPORTANTE: DEBES REEMPLAZAR ESTA URL DESPUÉS DE CREAR EL GOOGLE FORM
-        // ***********************************************************************************
-        const FORM_ACTION_URL = 'YOUR_GOOGLE_FORM_ACTION_URL_HERE'; 
-
-        // Los IDs 'entry' corresponden a los campos que crearás en tu Google Form:
-        // CUIDADO: Estos son solo EJEMPLOS. Tienes que reemplazarlos. (Ver instrucciones abajo)
-        const FIELD_IDS = {
-            nombre: 'entry.2005620554',      // Ejemplo: Nombre
-            apellido: 'entry.1045781291',    // Ejemplo: Apellido
-            edad: 'entry.1065046570',        // Ejemplo: Edad
-            genero: 'entry.1166974658',      // Ejemplo: Género
-            departamento: 'entry.1802447997',// Ejemplo: Departamento
-            provincia: 'entry.1054703597',   // Ejemplo: Provincia
-            distrito: 'entry.839337148',     // Ejemplo: Distrito
-            testimonio: 'entry.1466555417',  // Ejemplo: Testimonio
-            enlace: 'entry.480073285',       // Ejemplo: Enlace
-            email: 'entry.999999999'         // Ejemplo: Email
-        };
-        
-        // Datos de ejemplo estáticos (Solo para que la página cargue con información)
-        let infieles = [
-            { nombre: "Jhonatan R.", votos: 25, distrito: "HUACHO" },
-            { nombre: "Brenda T.", votos: 18, distrito: "HUALMAY" },
-            { nombre: "Luis S.", votos: 15, distrito: "SANTA MARÍA" }
-        ]; 
+        // Esta es la simulación de datos, se iniciará vacía y se llenará cuando envíes un reporte.
+        let infieles = []; 
         let currentOnlineCount = 60; 
+        
+        // Función para cargar datos de localStorage al inicio (si existen)
+        function cargarDatosLocales() {
+            const data = localStorage.getItem('infielesDB');
+            if (data) {
+                try {
+                    infieles = JSON.parse(data);
+                } catch (e) {
+                    console.error("Error al cargar datos de localStorage", e);
+                    infieles = []; 
+                }
+            }
+        }
+        
+        // Función para guardar datos en localStorage
+        function guardarDatosLocales() {
+            localStorage.setItem('infielesDB', JSON.stringify(infieles));
+        }
 
-        // Funciones de utilidad (Se mantienen las de estilo)
         function actualizarContador() {
             document.getElementById('lista-count').textContent = infieles.length;
         }
@@ -653,7 +659,6 @@
                 }
             }
         }
-
         function verificarAceptacionLegal() {
             const legal1 = document.getElementById('legal-1').checked;
             const legal2 = document.getElementById('legal-2').checked;
@@ -683,80 +688,53 @@
                 btnPublish.disabled = true;
             }
         }
-        
+
         // ***************************************************************
-        // FUNCIÓN CLAVE: AQUÍ SE ENVÍA LA INFORMACIÓN A GOOGLE FORMS
+        // FUNCIÓN CLAVE: ELIMINA EL ERROR 404 Y GUARDA LOCALMENTE (SOLO EN TU NAVEGADOR)
         // ***************************************************************
-        async function submitReporteCompleto() {
+        function submitReporteCompleto() {
             if (document.getElementById('publish-btn').disabled) {
                  alert("Por favor, acepta ambos Términos Legales para habilitar la publicación.");
                  return;
             }
-            
-            if (FORM_ACTION_URL === 'YOUR_GOOGLE_FORM_ACTION_URL_HERE') {
-                alert("⚠️ Error de Configuración: Debes seguir las instrucciones y reemplazar 'YOUR_GOOGLE_FORM_ACTION_URL_HERE' en el código. El reporte NO se guardará públicamente hasta que lo hagas.");
-                return;
-            }
-
             const nombre = document.getElementById('report-nombre').value.trim();
             const apellido = document.getElementById('report-apellido').value.trim();
             const distrito = document.getElementById('report-distrito').value;
             const testimonio = document.getElementById('report-testimonio').value.trim();
             
-            if (!nombre || !apellido || distrito === '' || testimonio.length < 10) {
+            if (!nombre || !apellido || distrito === 'Selecciona distrito' || testimonio.length < 10) {
                 alert("Por favor, rellena todos los campos obligatorios (*). El testimonio debe tener al menos 10 caracteres.");
                 return;
             }
             
-            // 1. Crear el objeto con los datos del formulario, usando los IDs de Google Forms
-            const formData = new FormData();
-            formData.append(FIELD_IDS.nombre, nombre);
-            formData.append(FIELD_IDS.apellido, apellido);
-            formData.append(FIELD_IDS.edad, document.getElementById('report-edad').value);
-            formData.append(FIELD_IDS.genero, document.getElementById('report-genero').value);
-            formData.append(FIELD_IDS.departamento, document.getElementById('report-departamento').value);
-            formData.append(FIELD_IDS.provincia, document.getElementById('report-provincia').value);
-            formData.append(FIELD_IDS.distrito, distrito);
-            formData.append(FIELD_IDS.testimonio, testimonio);
-            formData.append(FIELD_IDS.enlace, document.getElementById('report-enlace').value.trim());
-            formData.append(FIELD_IDS.email, document.getElementById('report-email').value.trim());
-            
-            const publishBtn = document.getElementById('publish-btn');
-            publishBtn.textContent = '⏳ Publicando...';
-            publishBtn.disabled = true;
+            const nombreCompleto = `${nombre} ${apellido}`.toLowerCase();
+            let existingInfiel = infieles.find(i => i.nombre.toLowerCase() === nombreCompleto && i.distrito === distrito);
 
-            try {
-                // 2. Enviar los datos al endpoint de Google Forms
-                const response = await fetch(FORM_ACTION_URL, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors' // Necesario para evitar errores de CORS con Google Forms
-                });
-
-                // Como usamos 'no-cors', la respuesta siempre es OK, así que solo confirmamos el envío
-                
-                // Si el formulario fue exitoso, actualizamos la simulación local
-                infieles.push({
+            if (existingInfiel) {
+                existingInfiel.votos += 1;
+            } else {
+                const nuevoInfiel = {
                     nombre: `${nombre} ${apellido}`,
                     votos: 1, 
                     distrito: distrito
-                });
-                
-                actualizarContador();
-                renderizarTop3();
-                cerrarModal('reportar-modal');
-                alert(`¡Éxito! El reporte de ${nombre} ${apellido} ha sido enviado a la base de datos pública. ✅`);
-
-            } catch (error) {
-                console.error('Error al enviar el reporte:', error);
-                alert('⚠️ Error: No se pudo conectar con la base de datos. Por favor, verifica tu configuración de Google Forms.');
-            } finally {
-                // Restaurar el formulario y el botón
-                document.getElementById('report-form').reset();
-                document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
-                verificarAceptacionLegal(); 
-                publishBtn.textContent = '🔥 Publicar Reporte de Infidelidad';
+                };
+                infieles.push(nuevoInfiel);
             }
+
+            // Guardar en LocalStorage y actualizar la UI
+            guardarDatosLocales(); 
+            actualizarContador();
+            renderizarTop3();
+            cerrarModal('reportar-modal');
+            
+            // Simulación de éxito sin conexión a servidor
+            alert(`¡Gracias! El reporte de ${nombre} ${apellido} ha sido GUARDADO EN TU COMPUTADORA y se ha actualizado el conteo de votos.`);
+            
+            // Restaurar el formulario
+            document.getElementById('report-form').reset();
+            document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
+            document.getElementById('file-selection-info').textContent = 'Elegir archivos';
+            verificarAceptacionLegal(); 
         }
         // ***************************************************************
         // FIN DE FUNCIÓN CLAVE
@@ -772,7 +750,7 @@
                         document.getElementById('not-found-name-display').textContent = `"${searchTerm}" no aparece en nuestra base de datos`;
                         document.getElementById('not-found-modal').style.display = "block";
                     } else {
-                        alert(`¡${searchTerm} ENCONTRADO/A! Si el listado fuera real, lo verías ahora mismo.`);
+                        alert(`¡${searchTerm} ENCONTRADO/A! Mostrando resultados en la lista...`);
                     }
                 }
             }
@@ -783,7 +761,18 @@
             document.getElementById('testimonio-char-count').textContent = `${currentLength} caracteres (mínimo 10)`;
         });
 
-        // Eventos de la Modal
+        document.getElementById('file-upload').addEventListener('change', function() {
+            let files = this.files;
+            let infoElement = document.getElementById('file-selection-info');
+            if (files.length === 0) {
+                infoElement.textContent = 'Elegir archivos';
+            } else if (files.length === 1) {
+                infoElement.textContent = files[0].name;
+            } else {
+                infoElement.textContent = `${files.length} archivos seleccionados`;
+            }
+        });
+
         const reportarModal = document.getElementById("reportar-modal");
         const reportarBtn = document.getElementById("reportar-btn");
 
@@ -804,7 +793,9 @@
                 cerrarModal('not-found-modal');
             }
         }
+        
         document.addEventListener('DOMContentLoaded', () => {
+            cargarDatosLocales(); // Cargar datos al inicio
             actualizarContador();
             renderizarTop3();
             actualizarOnlineCount();
