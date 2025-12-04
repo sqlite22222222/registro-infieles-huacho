@@ -160,7 +160,7 @@
             appearance: none; 
             -webkit-appearance: none; 
             -moz-appearance: none; 
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232c3e50%22%20d%3D%22M287%20173.5c-4.1%204.1-8.5%206.2-13.3%206.2s-9.2-2.1-13.3-6.2L146.2%2059%2031%20173.5c-4.1%204.1-8.5%206.2-13.3%206.2s-9.2-2.1-13.3-6.2c-8.2-8.2-8.2-21.5%200-29.7l131.2-131.2c8.2-8.2%2021.5-8.2%2029.7%200l131.2%20131.2c8.2%208.2%208.2%2021.5%200%2029.7z%22%2F%3E%3C%2Fsvg%3E'); /* Flecha más oscura */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232c3e50%22%20d%3D%22M287%20173.5c-4.1%204.1-8.5%206.2-13.3%206.2s-9.2-2.1-13.3-6.2L146.2%2059%2031%20173.5c-4.1%204.1-8.5%206.2-13.3%206.2s-9.2-2.1-13.3-6.2c-8.2-8.2-8.2-21.5%200-29.7l131.2-131.2c8.2-8.2%2021.5-8.2%2029.7%200l131.2%20131.2c8.2%208.2%208.2%2021.5%200%2029.7z%22%2F%3E%3C%2Fsvg%3E'); /* Flecha más oscura */
             background-repeat: no-repeat; 
             background-position: right 10px center; 
             background-size: 12px; 
@@ -227,7 +227,6 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #fcfcfc;
-            /* Se ha eliminado el div 'verification-status' anterior y se ha adoptado el estilo de la imagen */
         }
         
         .verification-status-box { /* Contenedor general de la verificación */
@@ -330,7 +329,7 @@
                 🗣️ REPORTAR INFIEL
             </button>
             <button class="btn btn-list">
-                <span id="lista-icon">👀</span> <span id="lista-count">0</span> LISTA DE INFIEL<span style="color: #2c3e50;">ES</span>
+                <span id="lista-icon">👀</span> <span id="lista-count">0</span> LISTA DE INFIEL<span>ES</span>
             </button>
             <button class="btn btn-online">
                 👥 <span id="online-count">60</span> PERSONAS EN LÍNEA
@@ -385,7 +384,7 @@
             <div class="report-header">
                 <h2>⚠️ Reportar Infidelidad</h2>
                 <div class="alert-social">
-                    <span style="font-weight: bold;">🚨 ALERTA SOCIAL:</span> Completa este formulario para registrar públicamente a una persona infiel. Este proceso es 100% ANÓNIMO. Todos los campos marcados con * son obligatorios.
+                    <span style="font-weight: bold;">🚨 ALERTA SOCIAL:</span> Completa este formulario para registrar públicamente a una persona infiel. Este proceso es 100% anónimo. Todos los campos marcados con * son obligatorios.
                 </div>
             </div>
 
@@ -510,7 +509,7 @@
                     
                     <div class="checkbox-group">
                         <input type="checkbox" id="legal-2" name="legal-check" onchange="verificarAceptacionLegal()">
-                        <label for="legal-2">Declaro que este testimonio se basa en una experiencia personal y asumo toda responsabilidad por la información enviada. Entiendo que esto **NO** es una acusación legal. *</label>
+                        <label for="legal-2">Declaro que este testimonio se basa en una experiencia personal y asumo toda responsabilidad por la información enviada. Entiendo que esto NO es una acusación legal. *</label>
                     </div>
                     
                     <div class="verification-group" id="verification-group">
@@ -599,6 +598,7 @@
                 
                 if (!response.ok) {
                     console.error("Respuesta HTTP fallida:", response.status, await response.text());
+                    // Manejar la situación de 404/401 si las credenciales son malas al cargar.
                     return; 
                 }
                 
@@ -713,6 +713,7 @@
             const distrito = document.getElementById('report-distrito').value;
             const edad = document.getElementById('report-edad').value;
             const genero = document.getElementById('report-genero').value;
+            // Testimonio ya no es obligatorio
             const testimonio = document.getElementById('report-testimonio').value.trim();
             const enlace = document.getElementById('report-enlace').value.trim();
             const email = document.getElementById('report-email').value.trim();
@@ -721,7 +722,7 @@
             const nombreCompleto = `${nombre} ${apellido}`;
             const nombreBusqueda = nombreCompleto.toLowerCase();
             
-            // ⚠️ VALIDACIÓN ACTUALIZADA: El testimonio ya no es obligatorio.
+            // VALIDACIÓN ACTUALIZADA: Solo campos obligatorios marcados con *
             if (!nombre || !apellido || distrito === 'Selecciona distrito') {
                 alert("Por favor, rellena los campos obligatorios (Nombre, Apellido y Distrito) marcados con (*).");
                 return;
@@ -771,7 +772,7 @@
                             "Distrito": distrito,
                             "Edad": parseInt(edad) || null,
                             "Genero": genero,
-                            // Testimonio puede ser vacío, se envía lo que haya
+                            // Testimonio puede ser vacío
                             "Testimonio": testimonio, 
                             "Enlace_Evidencia": enlace,
                             "Email_Contacto": email,
@@ -791,6 +792,7 @@
                 }
                 
                 if (!response.ok) {
+                    // Si hay un error, el error 404 será capturado aquí
                     throw new Error(`Error al enviar el reporte: ${response.status} - ${await response.text()}`);
                 }
                 
@@ -830,7 +832,7 @@
         
         document.getElementById('report-testimonio').addEventListener('input', function() {
             const currentLength = this.value.length;
-            // Etiqueta actualizada para reflejar que es opcional
+            // Etiqueta para reflejar que es opcional
             document.getElementById('testimonio-char-count').textContent = `${currentLength} caracteres (opcional)`;
         });
 
@@ -868,7 +870,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // ⚠️ Cargar los datos desde Airtable primero
+            // Cargar los datos desde Airtable al inicio
             cargarInfielesDesdeAirtable(); 
             
             actualizarOnlineCount();
