@@ -160,7 +160,7 @@
             appearance: none; 
             -webkit-appearance: none; 
             -moz-appearance: none; 
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232c3e50%22%20d%3D%22M287%20173.5c-4.1%204.1-8.5%206.2-13.3%206.2s-9.2-2.1-13.3-6.2L146.2%2059%2031%20173.5c-4.1%204.1-8.5%206.2-13.3%206.2s-9.2-2.1-13.3-6.2c-8.2-8.2-8.2-21.5%200-29.7l131.2-131.2c8.2-8.2%2021.5-8.2%2029.7%200l131.2%20131.2c8.2%208.2%208.2%2021.5%200%2029.7z%22%2F%3E%3C%2Fsvg%3E'); /* Flecha más oscura */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232c3e50%22%20d%3D%22M287%20173.5c-4.1%204.1-8.5%206.2-13.3%206.2s-9.2-2.1-13.3-6.2L146.2%2059%2031%20173.5c-4.1%204.1-8.5%206.2-13.3%206.2s-9.2-2.1-13.3-6.2c-8.2-8.2-8.2-21.5%200-29.7l131.2-131.2c8.2-8.2%2021.5-8.2%2029.7%200l131.2%20131.2c8.2%208.2%208.2%2021.5%200%2029.7z%22%2F%3E%3C%2Fsvg%3E'); /* Flecha más oscura */
             background-repeat: no-repeat; 
             background-position: right 10px center; 
             background-size: 12px; 
@@ -322,7 +322,7 @@
             REGISTRO PROVINCIAL DE INFIELES DE HUACHITO YORK 🔥 
         </div>
         <div class="header-subtitle">
-            ¡Busca y reporta infieles de Huacho, Hualmay, Huaura, Santa María y más. Encuentra la lista de las 'Girls' y los 'Boys' más votados de la provincia!.<br>☠️ Huacho pueblo chico, infierno grande ☠️
+            ¡Busca y reporta infieles de Huacho, Hualmay, Huaura, Santa María y más. Encuentra la lista de las 'Girls' y los 'Boys' más votados de la provincia!.<br>☠️ Huacho pueblo chico, infierno grande** ☠️
         </div>
 
         <div class="actions">
@@ -385,7 +385,7 @@
             <div class="report-header">
                 <h2>⚠️ Reportar Infidelidad</h2>
                 <div class="alert-social">
-                    <span style="font-weight: bold;">🚨 ALERTA SOCIAL:</span> Completa este formulario para registrar públicamente a una persona infiel. Este proceso es 100% ANÓNIMO. Todos los campos marcados con * son obligatorios.
+                    <span style="font-weight: bold;">🚨 ALERTA SOCIAL:</span> Completa este formulario para registrar públicamente a una persona infiel. Este proceso es **100% anónimo**. Todos los campos marcados con * son obligatorios.
                 </div>
             </div>
 
@@ -567,8 +567,15 @@
     </div>
 
     <script>
+        // === CONFIGURACIÓN DE AIRTABLE (REEMPLAZA CON TUS CREDENCIALES) ===
+        // ⚠️ ADVERTENCIA DE SEGURIDAD: Para uso serio, esta API Key DEBE ser ocultada por un proxy o backend.
+        const AIRTABLE_API_KEY = 'YOUR_API_KEY_HERE'; 
+        const AIRTABLE_BASE_ID = 'YOUR_BASE_ID_HERE'; 
+        const AIRTABLE_TABLE_NAME = 'Reportes'; // Asegúrate que este nombre coincida con tu tabla en Airtable
+
         let infieles = []; 
         let currentOnlineCount = 60; 
+        
         function actualizarContador() {
             document.getElementById('lista-count').textContent = infieles.length;
         }
@@ -577,6 +584,41 @@
             const fluctuation = Math.floor(Math.random() * 5) - 2; 
             currentOnlineCount = Math.max(1, currentOnlineCount + fluctuation); 
             document.getElementById('online-count').textContent = currentOnlineCount;
+        }
+
+        // === FUNCIÓN PARA CARGAR DATOS PERSISTENTES DESDE AIRTABLE (GET) ===
+        async function cargarInfielesDesdeAirtable() {
+            const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+            
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${AIRTABLE_API_KEY}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    console.error("Respuesta HTTP fallida:", response.status, await response.text());
+                    return; 
+                }
+                
+                const data = await response.json();
+                
+                // Mapear los registros de Airtable a la estructura de tu matriz 'infieles'
+                infieles = data.records.map(record => ({
+                    id: record.id, // ID del registro para actualizar (PATCH)
+                    nombre: record.fields.Nombre_Completo || 'Sin Nombre',
+                    votos: record.fields.Votos || 0, 
+                    distrito: record.fields.Distrito || 'Desconocido'
+                }));
+
+                // Una vez cargados, actualizamos la interfaz
+                actualizarContador();
+                renderizarTop3();
+                
+            } catch (error) {
+                console.error("Error al cargar datos de Airtable:", error);
+            }
         }
 
         function renderizarTop3() {
@@ -659,7 +701,9 @@
                 btnPublish.disabled = true;
             }
         }
-        function submitReporteCompleto() {
+        
+        // === FUNCIÓN PARA ENVIAR/ACTUALIZAR DATOS EN AIRTABLE (POST/PATCH) ===
+        async function submitReporteCompleto() {
             if (document.getElementById('publish-btn').disabled) {
                  alert("Por favor, acepta ambos Términos Legales para habilitar la publicación.");
                  return;
@@ -667,34 +711,105 @@
             const nombre = document.getElementById('report-nombre').value.trim();
             const apellido = document.getElementById('report-apellido').value.trim();
             const distrito = document.getElementById('report-distrito').value;
+            const edad = document.getElementById('report-edad').value;
+            const genero = document.getElementById('report-genero').value;
             const testimonio = document.getElementById('report-testimonio').value.trim();
+            const enlace = document.getElementById('report-enlace').value.trim();
+            const email = document.getElementById('report-email').value.trim();
+            
+            // Generar nombre completo y normalizar para búsqueda
+            const nombreCompleto = `${nombre} ${apellido}`;
+            const nombreBusqueda = nombreCompleto.toLowerCase();
             
             if (!nombre || !apellido || distrito === 'Selecciona distrito' || testimonio.length < 10) {
                 alert("Por favor, rellena todos los campos obligatorios (*). El testimonio debe tener al menos 10 caracteres.");
                 return;
             }
-            const nombreCompleto = `${nombre} ${apellido}`.toLowerCase();
-            let existingInfiel = infieles.find(i => i.nombre.toLowerCase() === nombreCompleto && i.distrito === distrito);
 
-            if (existingInfiel) {
-                existingInfiel.votos += 1;
-            } else {
-                const nuevoInfiel = {
-                    nombre: `${nombre} ${apellido}`,
-                    votos: 1, 
-                    distrito: distrito
-                };
-                infieles.push(nuevoInfiel);
+            // 1. Verificar si el infiel ya existe en la lista cargada de Airtable
+            let existingInfiel = infieles.find(i => 
+                i.nombre.toLowerCase() === nombreBusqueda && i.distrito === distrito
+            );
+
+            const base_url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+
+            try {
+                let response;
+                let isUpdate = false;
+                
+                if (existingInfiel) {
+                    // =========================
+                    // A. ACTUALIZAR (PATCH): Ya existe, solo incrementamos el voto
+                    // =========================
+                    isUpdate = true;
+                    const nuevosVotos = existingInfiel.votos + 1;
+                    const dataToUpdate = {
+                        "fields": {
+                            "Votos": nuevosVotos 
+                        }
+                    };
+
+                    // Usamos PATCH para actualizar un registro específico (requiere el ID en la URL)
+                    response = await fetch(`${base_url}/${existingInfiel.id}`, { 
+                        method: 'PATCH',
+                        headers: {
+                            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dataToUpdate) 
+                    });
+
+                } else {
+                    // =========================
+                    // B. CREAR (POST): Es un nuevo infiel
+                    // =========================
+                    const dataToCreate = {
+                        "fields": {
+                            // Asegúrate que los nombres de los campos (ej: 'Nombre_Completo') coincidan con los de tu tabla en Airtable
+                            "Nombre_Completo": nombreCompleto, 
+                            "Distrito": distrito,
+                            "Edad": parseInt(edad) || null,
+                            "Genero": genero,
+                            "Testimonio": testimonio,
+                            "Enlace_Evidencia": enlace,
+                            "Email_Contacto": email,
+                            "Votos": 1 // Inicializar con un voto
+                        }
+                    };
+                    
+                    // Usamos POST para crear un nuevo registro
+                    response = await fetch(base_url, {
+                        method: 'POST', 
+                        headers: {
+                            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dataToCreate)
+                    });
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`Error al enviar el reporte: ${response.status} - ${await response.text()}`);
+                }
+                
+                // 2. Si la publicación fue exitosa, recargamos toda la lista
+                await cargarInfielesDesdeAirtable(); 
+                
+                cerrarModal('reportar-modal');
+                alert(`¡Gracias! El reporte de ${nombreCompleto} ha sido ${isUpdate ? 'actualizado' : 'enviado'} y se ha actualizado el conteo de votos.`);
+                
+                // 3. Limpieza del formulario y verificación
+                document.getElementById('report-form').reset();
+                document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
+                document.getElementById('file-selection-info').textContent = 'Elegir archivos';
+                verificarAceptacionLegal(); 
+
+            } catch (error) {
+                console.error("Error en la publicación:", error);
+                alert("Ocurrió un error al intentar publicar el reporte. Inténtalo de nuevo. Detalle: " + error.message);
             }
-            actualizarContador();
-            renderizarTop3();
-            cerrarModal('reportar-modal');
-            alert(`¡Gracias! El reporte de ${nombre} ${apellido} ha sido enviado y se ha actualizado el conteo de votos.`);
-            document.getElementById('report-form').reset();
-            document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
-            document.getElementById('file-selection-info').textContent = 'Elegir archivos';
-            verificarAceptacionLegal(); 
         }
+        
         document.getElementById('search-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 const searchTerm = this.value.trim().toLowerCase();
@@ -748,9 +863,11 @@
                 cerrarModal('not-found-modal');
             }
         }
+
         document.addEventListener('DOMContentLoaded', () => {
-            actualizarContador();
-            renderizarTop3();
+            // ⚠️ Cargar los datos desde Airtable primero
+            cargarInfielesDesdeAirtable(); 
+            
             actualizarOnlineCount();
             setInterval(actualizarOnlineCount, 15000); 
         });
