@@ -6,6 +6,7 @@
     <meta name="google-site-verification" content="b3cerXLZRsj5zefuZazxMyDZZilHhfu2jlDiw27okFA" />
     <title>Registro Provincial de Infieles - Huachito York | Lista Negra</title>
     <meta name="keywords" content="lista de infieles huacho, lista de las girls, lista de las girls huachanas, lista de infieles, lista de infieles de santa maria, lista de infieles de hualmay, huachito york, infieles huacho, registro de infieles">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         /* [Se mantienen la mayoría de estilos generales, se ajustan los de verificación] */
         body { 
@@ -226,20 +227,21 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #fcfcfc;
+            /* Se ha eliminado el div 'verification-status' anterior y se ha adoptado el estilo de la imagen */
         }
         
         .verification-status-box { /* Contenedor general de la verificación */
-            background-color: #f0f8f0; 
+            background-color: #f0f8f0; /* Fondo verde muy claro para la caja */
             border-radius: 10px;
             padding: 15px;
             margin-top: 15px;
-            border: 1px solid #c8e6c9; 
+            border: 1px solid #c8e6c9; /* Borde verde claro */
         }
 
         .status-text { /* Estilo del texto "Verificación completada" */
             font-size: 16px;
             font-weight: 600;
-            color: #4CAF50; 
+            color: #4CAF50; /* Texto verde */
             display: flex;
             align-items: center;
             gap: 8px;
@@ -247,8 +249,8 @@
         }
 
         .status-badge { /* Estilo del "Publicación Habilitada" */
-            background-color: #d1d5db; 
-            color: #6b7280; 
+            background-color: #d1d5db; /* Fondo gris para el badge deshabilitado/pendiente */
+            color: #6b7280; /* Texto gris oscuro */
             padding: 6px 12px;
             border-radius: 5px;
             font-size: 14px;
@@ -261,8 +263,8 @@
         }
 
         .status-badge.enabled {
-            background-color: #dcfce7; 
-            color: #10b981; 
+            background-color: #dcfce7; /* Fondo verde muy claro para habilitado */
+            color: #10b981; /* Texto verde brillante */
         }
 
         .status-title {
@@ -297,17 +299,7 @@
         }
         .publish-note { font-size: 13px; color: #666; margin-top: 10px; text-align: center; }
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); padding-top: 20px; }
-        .not-found-modal-content { 
-            background-color: #f9fbfd; 
-            text-align: center; 
-            padding: 40px 20px; 
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2); 
-            border-radius: 20px; 
-            border-top: 5px solid #2ecc71; 
-            margin: 100px auto; 
-            max-width: 500px;
-            position: relative;
-        }
+        .not-found-modal-content { background-color: #f9fbfd; text-align: center; padding: 40px 20px; box-shadow: 0 0 25px rgba(0, 0, 0, 0.2); border-radius: 20px; border-top: 5px solid #2ecc71; }
         .clean-status { font-size: 32px; font-weight: 700; color: #27ae60; margin-bottom: 20px; }
         .shield-icon { display: block; width: 80px; height: 80px; background-color: #ebf5ee; border-radius: 50%; margin: 0 auto 20px; display: flex; justify-content: center; align-items: center; border: 3px solid #2ecc71; }
         .shield-icon svg { fill: #2ecc71; }
@@ -316,9 +308,9 @@
         .absence-note { font-size: 15px; color: #5d6d7e; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 30px; }
         .btn-search-other { background-color: #f7f9fc; color: #e74c3c; border: 2px solid #e74c3c; }
         .btn-search-other:hover { background-color: #fae0e0; }
-        .btn-close-nf { background-color: #2ecc71; color: white; border: none; }
+        .btn-close-nf { background-color: #2ecc71; color: white; }
         .modal-actions { display: flex; justify-content: space-around; margin-top: 30px; }
-        .modal-actions button { width: 45%; padding: 14px; font-size: 16px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        .modal-actions button { width: 45%; padding: 14px; font-size: 16px; border-radius: 10px; font-weight: 600; }
         .close-btn { color: #aaa; float: right; font-size: 36px; font-weight: bold; position: absolute; top: 10px; right: 20px; }
         .close-btn:hover, .close-btn:focus { color: #555; text-decoration: none; cursor: pointer; }
 
@@ -575,27 +567,34 @@
     </div>
 
     <script>
-        // Esta es la simulación de datos, se iniciará vacía y se llenará cuando envíes un reporte.
         let infieles = []; 
         let currentOnlineCount = 60; 
         
-        // Función para cargar datos de localStorage al inicio (si existen)
-        function cargarDatosLocales() {
-            const data = localStorage.getItem('infielesDB');
-            if (data) {
-                try {
-                    infieles = JSON.parse(data);
-                } catch (e) {
-                    console.error("Error al cargar datos de localStorage", e);
-                    infieles = []; 
-                }
-            }
-        }
-        
-        // Función para guardar datos en localStorage
-        function guardarDatosLocales() {
-            localStorage.setItem('infielesDB', JSON.stringify(infieles));
-        }
+        // ***************************************************************
+        //  CONFIGURACIÓN CRÍTICA DE GOOGLE FORMS
+        //  ¡URL Y IDs EXTRAÍDOS Y CONFIGURADOS!
+        // ***************************************************************
+
+        // 1. URL DE ACCIÓN MODIFICADA (Reemplazando viewform por formResponse)
+        const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdnTPc46poT36bp8iNXomjr-XVX79UzFPSdUnAsHvgsZz6ukg/formResponse';
+
+        // 2. IDs DE CAMPO (EXTRAÍDOS DEL ENLACE PRE-RELLENADO)
+        const FORM_FIELD_IDS = {
+            nombre: 'entry.1519579246',      // Nombre (AAAA)
+            apellido: 'entry.1549323599',    // Apellido (BBBB)
+            edad: 'entry.1229672580',        // Edad (1)
+            genero: 'entry.1431309916',      // Género (Opción 1)
+            departamento: 'entry.1188772302',// Departamento (Opción 1)
+            provincia: 'entry.1812767928',   // Provincia (Opción 1)
+            distrito: 'entry.530198461',     // Distrito (Opción 1)
+            testimonio: 'entry.1966148170',  // Testimonio (AAA...)
+            enlace: 'entry.1880885619',      // Enlace (AAA...)
+            email: 'entry.114158963',        // Email (AAA...)
+            legal1: 'entry.981597563',       // Legal 1 (Checkbox 1)
+            legal2: 'entry.293635913',       // Legal 2 (Checkbox 2)
+        };
+        // ***************************************************************
+
 
         function actualizarContador() {
             document.getElementById('lista-count').textContent = infieles.length;
@@ -688,56 +687,94 @@
             }
         }
 
-        // ***************************************************************
-        // FUNCIÓN CLAVE: ELIMINA EL ERROR 404 Y GUARDA LOCALMENTE (SOLO EN TU NAVEGADOR)
-        // ***************************************************************
-        function submitReporteCompleto() {
+        // FUNCIÓN DE ENVÍO ACTUALIZADA PARA GOOGLE FORMS
+        async function submitReporteCompleto() {
+            // 1. Validación de campos obligatorios y términos legales
             if (document.getElementById('publish-btn').disabled) {
                  alert("Por favor, acepta ambos Términos Legales para habilitar la publicación.");
                  return;
             }
             const nombre = document.getElementById('report-nombre').value.trim();
             const apellido = document.getElementById('report-apellido').value.trim();
+            const edad = document.getElementById('report-edad').value.trim();
+            const genero = document.getElementById('report-genero').value;
+            const departamento = document.getElementById('report-departamento').value;
+            const provincia = document.getElementById('report-provincia').value;
             const distrito = document.getElementById('report-distrito').value;
             const testimonio = document.getElementById('report-testimonio').value.trim();
+            const enlace = document.getElementById('report-enlace').value.trim();
+            const email = document.getElementById('report-email').value.trim();
             
-            if (!nombre || !apellido || distrito === 'Selecciona distrito' || testimonio.length < 10) {
-                alert("Por favor, rellena todos los campos obligatorios (*). El testimonio debe tener al menos 10 caracteres.");
+            // Los checkboxes deben ser "Aceptado" o "No Aceptado" para el envío a Forms
+            const legal1_value = document.getElementById('legal-1').checked ? 'Aceptado' : 'No Aceptado';
+            const legal2_value = document.getElementById('legal-2').checked ? 'Aceptado' : 'No Aceptado';
+            
+            if (!nombre || !apellido || !edad || distrito === 'Selecciona distrito' || testimonio.length < 10 || !document.getElementById('legal-1').checked || !document.getElementById('legal-2').checked) {
+                alert("Por favor, rellena todos los campos obligatorios (*), acepta los términos legales y asegúrate de que el testimonio tenga al menos 10 caracteres.");
                 return;
             }
-            
-            const nombreCompleto = `${nombre} ${apellido}`.toLowerCase();
-            let existingInfiel = infieles.find(i => i.nombre.toLowerCase() === nombreCompleto && i.distrito === distrito);
 
-            if (existingInfiel) {
-                existingInfiel.votos += 1;
-            } else {
-                const nuevoInfiel = {
-                    nombre: `${nombre} ${apellido}`,
-                    votos: 1, 
-                    distrito: distrito
-                };
-                infieles.push(nuevoInfiel);
+            // 2. Preparar los datos para el envío (usando los IDs del Formulario de Google)
+            const formData = new FormData();
+            formData.append(FORM_FIELD_IDS.nombre, nombre);
+            formData.append(FORM_FIELD_IDS.apellido, apellido);
+            formData.append(FORM_FIELD_IDS.edad, edad);
+            formData.append(FORM_FIELD_IDS.genero, genero);
+            formData.append(FORM_FIELD_IDS.departamento, departamento);
+            formData.append(FORM_FIELD_IDS.provincia, provincia);
+            formData.append(FORM_FIELD_IDS.distrito, distrito);
+            formData.append(FORM_FIELD_IDS.testimonio, testimonio);
+            formData.append(FORM_FIELD_IDS.enlace, enlace);
+            formData.append(FORM_FIELD_IDS.email, email);
+            formData.append(FORM_FIELD_IDS.legal1, legal1_value);
+            formData.append(FORM_FIELD_IDS.legal2, legal2_value);
+
+            // 3. Envío usando Fetch
+            try {
+                // Usamos fetch con mode: 'no-cors' que es compatible con Google Forms para envío anónimo.
+                const response = await fetch(GOOGLE_FORM_ACTION_URL, {
+                    method: 'POST',
+                    // Convertir FormData a URLSearchParams para compatibilidad con Google Forms
+                    body: new URLSearchParams(formData), 
+                    mode: 'no-cors' 
+                });
+
+                // 4. Actualización Local y Limpieza (Se asume éxito si no hay error de red)
+                
+                // Simulación de voto/registro local (para mantener la interfaz funcional)
+                const nombreCompleto = `${nombre} ${apellido}`.toLowerCase();
+                let existingInfiel = infieles.find(i => i.nombre.toLowerCase() === nombreCompleto && i.distrito === distrito);
+
+                if (existingInfiel) {
+                    existingInfiel.votos += 1;
+                } else {
+                    const nuevoInfiel = {
+                        nombre: `${nombre} ${apellido}`,
+                        votos: 1, 
+                        distrito: distrito
+                    };
+                    infieles.push(nuevoInfiel);
+                }
+
+                actualizarContador();
+                renderizarTop3();
+
+                // Limpiar formulario y cerrar modal
+                document.getElementById('report-form').reset();
+                document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
+                document.getElementById('file-selection-info').textContent = 'Elegir archivos';
+                verificarAceptacionLegal(); 
+                cerrarModal('reportar-modal');
+                
+                // Mensaje de éxito
+                alert(`✅ ¡ÉXITO! El reporte de ${nombre} ${apellido} ha sido enviado correctamente y se ha actualizado el conteo de votos en la lista.`);
+                
+            } catch (error) {
+                console.error('Error al enviar el reporte:', error);
+                // Mensaje de error si la URL de Acción es totalmente incorrecta o hay problemas de red
+                alert('❌ ERROR: Ocurrió un error al intentar publicar el reporte. Por favor, verifica tu conexión y la URL del formulario. Detalle: ' + error.message);
             }
-
-            // Guardar en LocalStorage y actualizar la UI
-            guardarDatosLocales(); 
-            actualizarContador();
-            renderizarTop3();
-            cerrarModal('reportar-modal');
-            
-            // Simulación de éxito sin conexión a servidor
-            alert(`¡Gracias! El reporte de ${nombre} ${apellido} ha sido GUARDADO EN TU COMPUTADORA y se ha actualizado el conteo de votos.`);
-            
-            // Restaurar el formulario
-            document.getElementById('report-form').reset();
-            document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
-            document.getElementById('file-selection-info').textContent = 'Elegir archivos';
-            verificarAceptacionLegal(); 
         }
-        // ***************************************************************
-        // FIN DE FUNCIÓN CLAVE
-        // ***************************************************************
 
         document.getElementById('search-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -792,9 +829,7 @@
                 cerrarModal('not-found-modal');
             }
         }
-        
         document.addEventListener('DOMContentLoaded', () => {
-            cargarDatosLocales(); // Cargar datos al inicio
             actualizarContador();
             renderizarTop3();
             actualizarOnlineCount();
