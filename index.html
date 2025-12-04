@@ -227,30 +227,29 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #fcfcfc;
-            /* Se ha eliminado el div 'verification-status' anterior y se ha adoptado el estilo de la imagen */
         }
         
-        .verification-status-box { /* Contenedor general de la verificación */
-            background-color: #f0f8f0; /* Fondo verde muy claro para la caja */
+        .verification-status-box { 
+            background-color: #f0f8f0; 
             border-radius: 10px;
             padding: 15px;
             margin-top: 15px;
-            border: 1px solid #c8e6c9; /* Borde verde claro */
+            border: 1px solid #c8e6c9; 
         }
 
-        .status-text { /* Estilo del texto "Verificación completada" */
+        .status-text { 
             font-size: 16px;
             font-weight: 600;
-            color: #4CAF50; /* Texto verde */
+            color: #4CAF50; 
             display: flex;
             align-items: center;
             gap: 8px;
             justify-content: center;
         }
 
-        .status-badge { /* Estilo del "Publicación Habilitada" */
-            background-color: #d1d5db; /* Fondo gris para el badge deshabilitado/pendiente */
-            color: #6b7280; /* Texto gris oscuro */
+        .status-badge { 
+            background-color: #d1d5db; 
+            color: #6b7280; 
             padding: 6px 12px;
             border-radius: 5px;
             font-size: 14px;
@@ -263,8 +262,8 @@
         }
 
         .status-badge.enabled {
-            background-color: #dcfce7; /* Fondo verde muy claro para habilitado */
-            color: #10b981; /* Texto verde brillante */
+            background-color: #dcfce7; 
+            color: #10b981; 
         }
 
         .status-title {
@@ -410,7 +409,7 @@
                         <div class="input-group">
                             <label for="report-genero">Género (opcional)</label>
                             <select id="report-genero">
-                                <option>Selecciona género</option>
+                                <option value="">Selecciona género</option>
                                 <option>Masculino</option>
                                 <option>Femenino</option>
                                 <option>Otro</option>
@@ -427,14 +426,14 @@
                         <div class="input-group">
                             <label for="report-departamento">Departamento *</label>
                             <select id="report-departamento" required>
-                                <option>Selecciona departamento</option>
+                                <option value="">Selecciona departamento</option>
                                 <option selected>Lima</option>
                             </select>
                         </div>
                         <div class="input-group">
                             <label for="report-provincia">Provincia *</label>
                             <select id="report-provincia" required>
-                                <option>Selecciona provincia</option>
+                                <option value="">Selecciona provincia</option>
                                 <option selected>Huaura</option>
                             </select>
                         </div>
@@ -567,35 +566,38 @@
     </div>
 
     <script>
-        let infieles = []; 
+        // ***************************************************************
+        //  CONFIGURACIÓN CRÍTICA DE GOOGLE FORMS Y GOOGLE SHEETS
+        // ***************************************************************
+        
+        // 1. URL DE ENVÍO DE DATOS (Backend - Formulario)
+        const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdnTPc46poT36bp8iNXomjr-XVX79UzFPSdUnAsHvgsZz6ukg/formResponse';
+        
+        // 2. URL DE LECTURA DE DATOS (Frontend - Hoja de Cálculo Pública)
+        // ✅ URL CORRECTA EN FORMATO CSV
+        const GOOGLE_SHEET_PUBLIC_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRa2mcbhtlnl02B5CpFMdwgJK9cRS_91bMzLsdE-7Lq9sYIlABz5pM_bkY6mi2FxXpgyR7HVztkTTo2/pub?gid=668032756&single=true&output=csv'; 
+
+        // 3. IDs DE LOS CAMPOS DEL FORMULARIO (NO CAMBIAR)
+        const FORM_FIELD_IDS = {
+            nombre: 'entry.1119561633',
+            apellido: 'entry.72599723',
+            edad: 'entry.1171852026',
+            genero: 'entry.1887103893',
+            departamento: 'entry.444743201',
+            provincia: 'entry.2066861218',
+            distrito: 'entry.1353272186',
+            testimonio: 'entry.848888062',
+            enlace: 'entry.1843064434',
+            email: 'entry.48834458'
+        };
+
+        // ***************************************************************
+        //  VARIABLES Y FUNCIONES PRINCIPALES
+        // ***************************************************************
+        
+        let infieles = []; // Aquí se almacenará la lista persistente
         let currentOnlineCount = 60; 
         
-        // ***************************************************************
-        //  CONFIGURACIÓN CRÍTICA DE GOOGLE FORMS
-        //  ¡URL Y IDs EXTRAÍDOS Y CONFIGURADOS!
-        // ***************************************************************
-
-        // 1. URL DE ACCIÓN MODIFICADA (Reemplazando viewform por formResponse)
-        const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdnTPc46poT36bp8iNXomjr-XVX79UzFPSdUnAsHvgsZz6ukg/formResponse';
-
-        // 2. IDs DE CAMPO (EXTRAÍDOS DEL ENLACE PRE-RELLENADO)
-        const FORM_FIELD_IDS = {
-            nombre: 'entry.1519579246',      // Nombre (AAAA)
-            apellido: 'entry.1549323599',    // Apellido (BBBB)
-            edad: 'entry.1229672580',        // Edad (1)
-            genero: 'entry.1431309916',      // Género (Opción 1)
-            departamento: 'entry.1188772302',// Departamento (Opción 1)
-            provincia: 'entry.1812767928',   // Provincia (Opción 1)
-            distrito: 'entry.530198461',     // Distrito (Opción 1)
-            testimonio: 'entry.1966148170',  // Testimonio (AAA...)
-            enlace: 'entry.1880885619',      // Enlace (AAA...)
-            email: 'entry.114158963',        // Email (AAA...)
-            legal1: 'entry.981597563',       // Legal 1 (Checkbox 1)
-            legal2: 'entry.293635913',       // Legal 2 (Checkbox 2)
-        };
-        // ***************************************************************
-
-
         function actualizarContador() {
             document.getElementById('lista-count').textContent = infieles.length;
         }
@@ -657,6 +659,64 @@
                 }
             }
         }
+        
+        // Función para cargar los datos del Google Sheet y hacer que la lista sea persistente
+        async function cargarInfielesDesdeHoja() {
+            
+            try {
+                // Fetch de la data en formato CSV
+                const response = await fetch(GOOGLE_SHEET_PUBLIC_URL);
+                const data = await response.text();
+                
+                // Procesar los datos (asumiendo formato CSV separado por comas)
+                const lineas = data.trim().split('\n');
+                const registros = lineas.slice(1); // Ignorar la cabecera
+                
+                let conteo = {};
+                
+                registros.forEach(registro => {
+                    // Columnas de Form Responses 1: 
+                    // 0: Marca temporal, 1: Nombre, 2: Apellido, 3: Edad, 4: Género, 5: Departamento, 6: Provincia, 7: Distrito, 8: Testimonio, 9: Enlace, 10: Email
+                    
+                    // Nota: Si los campos tienen comas, el split(',') se puede corromper. 
+                    // Si tienes problemas de parseo en el futuro, cambia el formato a TSV.
+                    const columnas = registro.split(','); 
+                    
+                    if (columnas.length >= 8) { 
+                        // Utilizamos trim() para quitar espacios y replace para quitar comillas dobles si Google Sheet las añadió.
+                        const nombre = columnas[1] ? columnas[1].trim().replace(/^"|"$/g, '') : '';
+                        const apellido = columnas[2] ? columnas[2].trim().replace(/^"|"$/g, '') : '';
+                        const distrito = columnas[7] ? columnas[7].trim().replace(/^"|"$/g, '') : '';
+
+                        // Solo procesar si hay datos de Nombre, Apellido y Distrito
+                        if (nombre && apellido && distrito && distrito !== 'Selecciona distrito') {
+                            const nombreCompleto = `${nombre} ${apellido}`;
+                            const key = `${nombreCompleto}#${distrito}`; // Clave única: Nombre Completo + Distrito
+                            
+                            if (conteo[key]) {
+                                conteo[key].votos += 1;
+                            } else {
+                                conteo[key] = {
+                                    nombre: nombreCompleto,
+                                    votos: 1,
+                                    distrito: distrito
+                                };
+                            }
+                        }
+                    }
+                });
+
+                // Rellenar la lista 'infieles' y actualizar la interfaz
+                infieles = Object.values(conteo);
+                actualizarContador();
+                renderizarTop3();
+                
+            } catch (error) {
+                console.error("Error al cargar los datos de Google Sheets:", error);
+                alert("Advertencia: No se pudieron cargar los datos públicos de la lista. Revisa la URL pública del Sheet.");
+            }
+        }
+        
         function verificarAceptacionLegal() {
             const legal1 = document.getElementById('legal-1').checked;
             const legal2 = document.getElementById('legal-2').checked;
@@ -686,17 +746,17 @@
                 btnPublish.disabled = true;
             }
         }
-
-        // FUNCIÓN DE ENVÍO ACTUALIZADA PARA GOOGLE FORMS
+        
+        // Función para enviar el reporte a Google Forms (¡Ahora sí es un envío real!)
         async function submitReporteCompleto() {
-            // 1. Validación de campos obligatorios y términos legales
             if (document.getElementById('publish-btn').disabled) {
                  alert("Por favor, acepta ambos Términos Legales para habilitar la publicación.");
                  return;
             }
+            
             const nombre = document.getElementById('report-nombre').value.trim();
             const apellido = document.getElementById('report-apellido').value.trim();
-            const edad = document.getElementById('report-edad').value.trim();
+            const edad = document.getElementById('report-edad').value;
             const genero = document.getElementById('report-genero').value;
             const departamento = document.getElementById('report-departamento').value;
             const provincia = document.getElementById('report-provincia').value;
@@ -705,16 +765,11 @@
             const enlace = document.getElementById('report-enlace').value.trim();
             const email = document.getElementById('report-email').value.trim();
             
-            // Los checkboxes deben ser "Aceptado" o "No Aceptado" para el envío a Forms
-            const legal1_value = document.getElementById('legal-1').checked ? 'Aceptado' : 'No Aceptado';
-            const legal2_value = document.getElementById('legal-2').checked ? 'Aceptado' : 'No Aceptado';
-            
-            if (!nombre || !apellido || !edad || distrito === 'Selecciona distrito' || testimonio.length < 10 || !document.getElementById('legal-1').checked || !document.getElementById('legal-2').checked) {
-                alert("Por favor, rellena todos los campos obligatorios (*), acepta los términos legales y asegúrate de que el testimonio tenga al menos 10 caracteres.");
+            if (!nombre || !apellido || distrito === 'Selecciona distrito' || testimonio.length < 10) {
+                alert("Por favor, rellena todos los campos obligatorios (*). El testimonio debe tener al menos 10 caracteres.");
                 return;
             }
 
-            // 2. Preparar los datos para el envío (usando los IDs del Formulario de Google)
             const formData = new FormData();
             formData.append(FORM_FIELD_IDS.nombre, nombre);
             formData.append(FORM_FIELD_IDS.apellido, apellido);
@@ -726,56 +781,36 @@
             formData.append(FORM_FIELD_IDS.testimonio, testimonio);
             formData.append(FORM_FIELD_IDS.enlace, enlace);
             formData.append(FORM_FIELD_IDS.email, email);
-            formData.append(FORM_FIELD_IDS.legal1, legal1_value);
-            formData.append(FORM_FIELD_IDS.legal2, legal2_value);
 
-            // 3. Envío usando Fetch
+            // Simulación de envío (POST)
             try {
-                // Usamos fetch con mode: 'no-cors' que es compatible con Google Forms para envío anónimo.
                 const response = await fetch(GOOGLE_FORM_ACTION_URL, {
                     method: 'POST',
-                    // Convertir FormData a URLSearchParams para compatibilidad con Google Forms
-                    body: new URLSearchParams(formData), 
-                    mode: 'no-cors' 
+                    body: formData,
+                    mode: 'no-cors' // Modo necesario para enviar a Google Forms
                 });
 
-                // 4. Actualización Local y Limpieza (Se asume éxito si no hay error de red)
+                // Puesto que usamos 'no-cors', asumimos el éxito del envío si no hay error de red.
                 
-                // Simulación de voto/registro local (para mantener la interfaz funcional)
-                const nombreCompleto = `${nombre} ${apellido}`.toLowerCase();
-                let existingInfiel = infieles.find(i => i.nombre.toLowerCase() === nombreCompleto && i.distrito === distrito);
-
-                if (existingInfiel) {
-                    existingInfiel.votos += 1;
-                } else {
-                    const nuevoInfiel = {
-                        nombre: `${nombre} ${apellido}`,
-                        votos: 1, 
-                        distrito: distrito
-                    };
-                    infieles.push(nuevoInfiel);
-                }
-
-                actualizarContador();
-                renderizarTop3();
-
-                // Limpiar formulario y cerrar modal
+                // 1. Limpiar el formulario
                 document.getElementById('report-form').reset();
                 document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
                 document.getElementById('file-selection-info').textContent = 'Elegir archivos';
                 verificarAceptacionLegal(); 
                 cerrarModal('reportar-modal');
                 
-                // Mensaje de éxito
-                alert(`✅ ¡ÉXITO! El reporte de ${nombre} ${apellido} ha sido enviado correctamente y se ha actualizado el conteo de votos en la lista.`);
+                // 2. Notificar al usuario y forzar la recarga de datos
+                alert(`✅ ¡Reporte de ${nombre} ${apellido} enviado con éxito! Recargando la lista pública...`);
                 
+                // 3. RECÁRGAMOS LOS DATOS DE LA HOJA para que el cambio se vea reflejado globalmente.
+                await cargarInfielesDesdeHoja(); 
+
             } catch (error) {
-                console.error('Error al enviar el reporte:', error);
-                // Mensaje de error si la URL de Acción es totalmente incorrecta o hay problemas de red
-                alert('❌ ERROR: Ocurrió un error al intentar publicar el reporte. Por favor, verifica tu conexión y la URL del formulario. Detalle: ' + error.message);
+                console.error("Error al enviar el reporte:", error);
+                alert("❌ Ocurrió un error al intentar publicar el reporte. Inténtalo de nuevo. Detalle: Error de conexión o URL incorrecta.");
             }
         }
-
+        
         document.getElementById('search-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 const searchTerm = this.value.trim().toLowerCase();
@@ -830,8 +865,9 @@
             }
         }
         document.addEventListener('DOMContentLoaded', () => {
-            actualizarContador();
-            renderizarTop3();
+            // 1. Cargamos la lista de infieles al iniciar para que sea persistente
+            cargarInfielesDesdeHoja(); 
+            // 2. Iniciamos el contador de gente online
             actualizarOnlineCount();
             setInterval(actualizarOnlineCount, 15000); 
         });
