@@ -571,10 +571,12 @@
         // ***************************************************************
         
         // 1. URL DE ENVÍO DE DATOS (Backend - Formulario)
+        // 🚨 ¡IMPORTANTE! SI TIENES EL ERROR 404 AL ENVIAR, DEBES REEMPLAZAR ESTA URL.
+        // Cópiala de la opción 'Incorporar' (Embed HTML) de tu Google Form.
         const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdnTPc46poT36bp8iNXomjr-XVX79UzFPSdUnAsHvgsZz6ukg/formResponse';
         
         // 2. URL DE LECTURA DE DATOS (Frontend - Hoja de Cálculo Pública)
-        // ✅ URL CORRECTA EN FORMATO CSV
+        // ✅ URL pública que me proporcionaste.
         const GOOGLE_SHEET_PUBLIC_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRa2mcbhtlnl02B5CpFMdwgJK9cRS_91bMzLsdE-7Lq9sYIlABz5pM_bkY6mi2FxXpgyR7HVztkTTo2/pub?gid=668032756&single=true&output=csv'; 
 
         // 3. IDs DE LOS CAMPOS DEL FORMULARIO (NO CAMBIAR)
@@ -679,7 +681,7 @@
                     // 0: Marca temporal, 1: Nombre, 2: Apellido, 3: Edad, 4: Género, 5: Departamento, 6: Provincia, 7: Distrito, 8: Testimonio, 9: Enlace, 10: Email
                     
                     // Nota: Si los campos tienen comas, el split(',') se puede corromper. 
-                    // Si tienes problemas de parseo en el futuro, cambia el formato a TSV.
+                    // Se utiliza una solución simple, pero puede fallar si hay comas en los campos.
                     const columnas = registro.split(','); 
                     
                     if (columnas.length >= 8) { 
@@ -713,7 +715,7 @@
                 
             } catch (error) {
                 console.error("Error al cargar los datos de Google Sheets:", error);
-                alert("Advertencia: No se pudieron cargar los datos públicos de la lista. Revisa la URL pública del Sheet.");
+                // Si la carga falla, la lista permanecerá en 0.
             }
         }
         
@@ -747,7 +749,7 @@
             }
         }
         
-        // Función para enviar el reporte a Google Forms (¡Ahora sí es un envío real!)
+        // Función para enviar el reporte a Google Forms 
         async function submitReporteCompleto() {
             if (document.getElementById('publish-btn').disabled) {
                  alert("Por favor, acepta ambos Términos Legales para habilitar la publicación.");
@@ -782,7 +784,7 @@
             formData.append(FORM_FIELD_IDS.enlace, enlace);
             formData.append(FORM_FIELD_IDS.email, email);
 
-            // Simulación de envío (POST)
+            // Envío (POST) a Google Forms
             try {
                 const response = await fetch(GOOGLE_FORM_ACTION_URL, {
                     method: 'POST',
@@ -790,24 +792,24 @@
                     mode: 'no-cors' // Modo necesario para enviar a Google Forms
                 });
 
-                // Puesto que usamos 'no-cors', asumimos el éxito del envío si no hay error de red.
+                // Asumimos éxito si no hay error de red, gracias a 'no-cors'.
                 
                 // 1. Limpiar el formulario
+                document.getElementById('reportar-modal').style.display = "none";
                 document.getElementById('report-form').reset();
                 document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
                 document.getElementById('file-selection-info').textContent = 'Elegir archivos';
                 verificarAceptacionLegal(); 
-                cerrarModal('reportar-modal');
                 
-                // 2. Notificar al usuario y forzar la recarga de datos
+                // 2. Notificar al usuario 
                 alert(`✅ ¡Reporte de ${nombre} ${apellido} enviado con éxito! Recargando la lista pública...`);
                 
-                // 3. RECÁRGAMOS LOS DATOS DE LA HOJA para que el cambio se vea reflejado globalmente.
+                // 3. RECÁRGAMOS LOS DATOS DE LA HOJA
                 await cargarInfielesDesdeHoja(); 
 
             } catch (error) {
                 console.error("Error al enviar el reporte:", error);
-                alert("❌ Ocurrió un error al intentar publicar el reporte. Inténtalo de nuevo. Detalle: Error de conexión o URL incorrecta.");
+                alert("❌ Ocurrió un error al intentar publicar el reporte. Inténtalo de nuevo. Detalle: Revisa si la URL de acción del formulario es correcta. (Error 404)");
             }
         }
         
