@@ -456,9 +456,9 @@
                         <span style="color: #f39c12;">💬</span> Testimonio / Motivo del Reporte
                     </div>
                     <div class="input-group">
-                        <label for="report-testimonio">Cuenta lo que sucedió *</label>
-                        <textarea id="report-testimonio" rows="5" placeholder="Describe el motivo del reporte. Mínimo 10 caracteres." required minlength="10"></textarea>
-                        <div class="char-count" id="testimonio-char-count">0 caracteres (mínimo 10)</div>
+                        <label for="report-testimonio">Cuenta lo que sucedió</label>
+                        <textarea id="report-testimonio" rows="5" placeholder="Describe el motivo del reporte. (Opcional)"></textarea>
+                        <div class="char-count" id="testimonio-char-count">0 caracteres (opcional)</div>
                     </div>
                 </div>
 
@@ -510,7 +510,7 @@
                     
                     <div class="checkbox-group">
                         <input type="checkbox" id="legal-2" name="legal-check" onchange="verificarAceptacionLegal()">
-                        <label for="legal-2">Declaro que este testimonio se basa en una experiencia personal y asumo toda responsabilidad por la información enviada. Entiendo que esto NO es una acusación legal. </label>
+                        <label for="legal-2">Declaro que este testimonio se basa en una experiencia personal y asumo toda responsabilidad por la información enviada. Entiendo que esto **NO** es una acusación legal. *</label>
                     </div>
                     
                     <div class="verification-group" id="verification-group">
@@ -721,8 +721,9 @@
             const nombreCompleto = `${nombre} ${apellido}`;
             const nombreBusqueda = nombreCompleto.toLowerCase();
             
-            if (!nombre || !apellido || distrito === 'Selecciona distrito' || testimonio.length < 10) {
-                alert("Por favor, rellena todos los campos obligatorios (*). El testimonio debe tener al menos 10 caracteres.");
+            // ⚠️ VALIDACIÓN ACTUALIZADA: El testimonio ya no es obligatorio.
+            if (!nombre || !apellido || distrito === 'Selecciona distrito') {
+                alert("Por favor, rellena los campos obligatorios (Nombre, Apellido y Distrito) marcados con (*).");
                 return;
             }
 
@@ -770,7 +771,8 @@
                             "Distrito": distrito,
                             "Edad": parseInt(edad) || null,
                             "Genero": genero,
-                            "Testimonio": testimonio,
+                            // Testimonio puede ser vacío, se envía lo que haya
+                            "Testimonio": testimonio, 
                             "Enlace_Evidencia": enlace,
                             "Email_Contacto": email,
                             "Votos": 1 // Inicializar con un voto
@@ -800,7 +802,7 @@
                 
                 // 3. Limpieza del formulario y verificación
                 document.getElementById('report-form').reset();
-                document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
+                document.getElementById('testimonio-char-count').textContent = '0 caracteres (opcional)';
                 document.getElementById('file-selection-info').textContent = 'Elegir archivos';
                 verificarAceptacionLegal(); 
 
@@ -828,7 +830,8 @@
         
         document.getElementById('report-testimonio').addEventListener('input', function() {
             const currentLength = this.value.length;
-            document.getElementById('testimonio-char-count').textContent = `${currentLength} caracteres (mínimo 10)`;
+            // Etiqueta actualizada para reflejar que es opcional
+            document.getElementById('testimonio-char-count').textContent = `${currentLength} caracteres (opcional)`;
         });
 
         document.getElementById('file-upload').addEventListener('change', function() {
