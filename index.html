@@ -8,7 +8,7 @@
     <meta name="keywords" content="lista de infieles huacho, lista de las girls, lista de las girls huachanas, lista de infieles, lista de infieles de santa maria, lista de infieles de hualmay, huachito york, infieles huacho, registro de infieles">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* [Se mantienen la mayoría de estilos generales, se ajustan los de verificación] */
+        /* Estilos CSS (Se mantienen sin cambios grandes para no marearte) */
         body { 
             font-family: 'Poppins', sans-serif; 
             margin: 0; 
@@ -220,7 +220,7 @@
         .checkbox-group input[type="checkbox"] { margin-right: 12px; margin-top: 5px; accent-color: #e74c3c; min-width: 16px; min-height: 16px; cursor: pointer; } 
         .checkbox-group label { font-size: 15px; font-weight: normal; color: #34495e; line-height: 1.4; cursor: pointer; }
         
-        /* --- ESTILOS DE VERIFICACIÓN (Nuevos/Modificados) --- */
+        /* --- ESTILOS DE VERIFICACIÓN --- */
         .verification-group { 
             margin-bottom: 25px;
             padding: 15px;
@@ -230,26 +230,26 @@
         }
         
         .verification-status-box { /* Contenedor general de la verificación */
-            background-color: #f0f8f0; /* Fondo verde muy claro para la caja */
+            background-color: #f0f8f0; 
             border-radius: 10px;
             padding: 15px;
             margin-top: 15px;
-            border: 1px solid #c8e6c9; /* Borde verde claro */
+            border: 1px solid #c8e6c9; 
         }
 
-        .status-text { /* Estilo del texto "Verificación completada" */
+        .status-text { 
             font-size: 16px;
             font-weight: 600;
-            color: #4CAF50; /* Texto verde */
+            color: #4CAF50; 
             display: flex;
             align-items: center;
             gap: 8px;
             justify-content: center;
         }
 
-        .status-badge { /* Estilo del "Publicación Habilitada" */
-            background-color: #d1d5db; /* Fondo gris para el badge deshabilitado/pendiente */
-            color: #6b7280; /* Texto gris oscuro */
+        .status-badge { 
+            background-color: #d1d5db; 
+            color: #6b7280; 
             padding: 6px 12px;
             border-radius: 5px;
             font-size: 14px;
@@ -262,8 +262,8 @@
         }
 
         .status-badge.enabled {
-            background-color: #dcfce7; /* Fondo verde muy claro para habilitado */
-            color: #10b981; /* Texto verde brillante */
+            background-color: #dcfce7; 
+            color: #10b981; 
         }
 
         .status-title {
@@ -298,7 +298,17 @@
         }
         .publish-note { font-size: 13px; color: #666; margin-top: 10px; text-align: center; }
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); padding-top: 20px; }
-        .not-found-modal-content { background-color: #f9fbfd; text-align: center; padding: 40px 20px; box-shadow: 0 0 25px rgba(0, 0, 0, 0.2); border-radius: 20px; border-top: 5px solid #2ecc71; }
+        .not-found-modal-content { 
+            background-color: #f9fbfd; 
+            text-align: center; 
+            padding: 40px 20px; 
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2); 
+            border-radius: 20px; 
+            border-top: 5px solid #2ecc71; 
+            margin: 100px auto; 
+            max-width: 500px;
+            position: relative;
+        }
         .clean-status { font-size: 32px; font-weight: 700; color: #27ae60; margin-bottom: 20px; }
         .shield-icon { display: block; width: 80px; height: 80px; background-color: #ebf5ee; border-radius: 50%; margin: 0 auto 20px; display: flex; justify-content: center; align-items: center; border: 3px solid #2ecc71; }
         .shield-icon svg { fill: #2ecc71; }
@@ -307,9 +317,9 @@
         .absence-note { font-size: 15px; color: #5d6d7e; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 30px; }
         .btn-search-other { background-color: #f7f9fc; color: #e74c3c; border: 2px solid #e74c3c; }
         .btn-search-other:hover { background-color: #fae0e0; }
-        .btn-close-nf { background-color: #2ecc71; color: white; }
+        .btn-close-nf { background-color: #2ecc71; color: white; border: none; }
         .modal-actions { display: flex; justify-content: space-around; margin-top: 30px; }
-        .modal-actions button { width: 45%; padding: 14px; font-size: 16px; border-radius: 10px; font-weight: 600; }
+        .modal-actions button { width: 45%; padding: 14px; font-size: 16px; border-radius: 10px; font-weight: 600; cursor: pointer; }
         .close-btn { color: #aaa; float: right; font-size: 36px; font-weight: bold; position: absolute; top: 10px; right: 20px; }
         .close-btn:hover, .close-btn:focus { color: #555; text-decoration: none; cursor: pointer; }
 
@@ -329,7 +339,7 @@
                 🗣️ REPORTAR INFIEL
             </button>
             <button class="btn btn-list">
-                <span id="lista-icon">👀</span> <span id="lista-count">0</span> LISTA DE INFIEL<span>ES</span>
+                <span id="lista-icon">👀</span> <span id="lista-count">3</span> LISTA DE INFIELES
             </button>
             <button class="btn btn-online">
                 👥 <span id="online-count">60</span> PERSONAS EN LÍNEA
@@ -384,7 +394,7 @@
             <div class="report-header">
                 <h2>⚠️ Reportar Infidelidad</h2>
                 <div class="alert-social">
-                    <span style="font-weight: bold;">🚨 ALERTA SOCIAL:</span> Completa este formulario para registrar públicamente a una persona infiel. Este proceso es 100% anónimo. Todos los campos marcados con * son obligatorios.
+                    <span style="font-weight: bold;">🚨 ALERTA SOCIAL:</span> Completa este formulario para registrar públicamente a una persona infiel. Este proceso es **100% anónimo**. Todos los campos marcados con * son obligatorios.
                 </div>
             </div>
 
@@ -409,7 +419,7 @@
                         <div class="input-group">
                             <label for="report-genero">Género (opcional)</label>
                             <select id="report-genero">
-                                <option>Selecciona género</option>
+                                <option value="No especificado">Selecciona género</option>
                                 <option>Masculino</option>
                                 <option>Femenino</option>
                                 <option>Otro</option>
@@ -426,21 +436,19 @@
                         <div class="input-group">
                             <label for="report-departamento">Departamento *</label>
                             <select id="report-departamento" required>
-                                <option>Selecciona departamento</option>
-                                <option selected>Lima</option>
+                                <option value="Lima">Lima</option>
                             </select>
                         </div>
                         <div class="input-group">
                             <label for="report-provincia">Provincia *</label>
                             <select id="report-provincia" required>
-                                <option>Selecciona provincia</option>
-                                <option selected>Huaura</option>
+                                <option value="Huaura">Huaura</option>
                             </select>
                         </div>
                         <div class="input-group" style="grid-column: 1 / span 2;">
                             <label for="report-distrito">Distrito *</label>
                             <select id="report-distrito" required>
-                                <option value="Selecciona distrito">Selecciona distrito</option>
+                                <option value="">Selecciona distrito</option>
                                 <option>Huacho</option>
                                 <option>Hualmay</option>
                                 <option>Santa María</option>
@@ -455,9 +463,9 @@
                         <span style="color: #f39c12;">💬</span> Testimonio / Motivo del Reporte
                     </div>
                     <div class="input-group">
-                        <label for="report-testimonio">Cuenta lo que sucedió</label>
-                        <textarea id="report-testimonio" rows="5" placeholder="Describe el motivo del reporte. (Opcional)"></textarea>
-                        <div class="char-count" id="testimonio-char-count">0 caracteres (opcional)</div>
+                        <label for="report-testimonio">Cuenta lo que sucedió *</label>
+                        <textarea id="report-testimonio" rows="5" placeholder="Describe el motivo del reporte. Mínimo 10 caracteres." required minlength="10"></textarea>
+                        <div class="char-count" id="testimonio-char-count">0 caracteres (mínimo 10)</div>
                     </div>
                 </div>
 
@@ -465,30 +473,19 @@
                     <div class="section-title">
                         <span style="color: #e74c3c;">🎤</span> Evidencias (Opcional)
                     </div>
-                    <p style="font-size: 15px; color: #5d6d7e;">Puedes adjuntar capturas de pantalla, fotos, documentos PDF o enlaces como pruebas.</p>
+                    <p style="font-size: 15px; color: #5d6d7e;">Puedes adjuntar enlaces de pruebas (las imágenes no se suben directamente a la base de datos de Google Forms).</p>
                     
                     <div class="input-group">
-                        <label>Subir Archivos (Imágenes o PDF)</label>
-                        <div class="evidence-upload-box">
-                            <div class="file-info" id="file-selection-info">Elegir archivos</div>
-                            <label for="file-upload" class="btn-upload-file">Elegir archivos</label>
-                            <input type="file" id="file-upload" multiple style="display: none;">
-                        </div>
-                        <div class="file-upload-specs">Formatos permitidos: JPG, PNG, GIF, WebP, PDF. Máximo 10MB por archivo.</div>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="report-enlace">Enlaces externos (URLs)</label>
+                        <label for="report-enlace">Enlaces externos (URLs) (opcional)</label>
                         <input type="url" id="report-enlace" placeholder="https://ejemplo.com/evidencia">
                     </div>
 
                     <div class="input-group">
                         <label for="report-email">Tu correo electrónico (opcional)</label>
-                        <input type="email" id="report-email" placeholder="tu@gmail.com (Solo necesario si quieres editar/eliminar después)">
+                        <input type="email" id="report-email" placeholder="tu@gmail.com">
                         <span style="font-size: 13px; color: #3498db; margin-top: 5px;">ℹ️ Si deseas poder solicitar ediciones o eliminaciones futuras, proporciona un correo Gmail válido.</span>
                     </div>
                 </div>
-
                 <div class="form-section legal-section">
                     <div class="section-title">
                         <span style="color: #e74c3c;">⚖️</span> Términos Legales y Responsabilidad
@@ -509,7 +506,7 @@
                     
                     <div class="checkbox-group">
                         <input type="checkbox" id="legal-2" name="legal-check" onchange="verificarAceptacionLegal()">
-                        <label for="legal-2">Declaro que este testimonio se basa en una experiencia personal y asumo toda responsabilidad por la información enviada. Entiendo que esto NO es una acusación legal. *</label>
+                        <label for="legal-2">Declaro que este testimonio se basa en una experiencia personal y asumo toda responsabilidad por la información enviada. Entiendo que esto **NO** es una acusación legal. *</label>
                     </div>
                     
                     <div class="verification-group" id="verification-group">
@@ -566,15 +563,35 @@
     </div>
 
     <script>
-        // === CONFIGURACIÓN DE AIRTABLE (REEMPLAZA CON TUS CREDENCIALES) ===
-        // ⚠️ ADVERTENCIA DE SEGURIDAD: Para uso serio, esta API Key DEBE ser ocultada por un proxy o backend.
-        const AIRTABLE_API_KEY = 'YOUR_API_KEY_HERE'; 
-        const AIRTABLE_BASE_ID = 'YOUR_BASE_ID_HERE'; 
-        const AIRTABLE_TABLE_NAME = 'Reportes'; // Asegúrate que este nombre coincida con tu tabla en Airtable
+        // ***********************************************************************************
+        // ⚠️ IMPORTANTE: DEBES REEMPLAZAR ESTA URL DESPUÉS DE CREAR EL GOOGLE FORM
+        // ***********************************************************************************
+        const FORM_ACTION_URL = 'YOUR_GOOGLE_FORM_ACTION_URL_HERE'; 
 
-        let infieles = []; 
-        let currentOnlineCount = 60; 
+        // Los IDs 'entry' corresponden a los campos que crearás en tu Google Form:
+        // CUIDADO: Estos son solo EJEMPLOS. Tienes que reemplazarlos. (Ver instrucciones abajo)
+        const FIELD_IDS = {
+            nombre: 'entry.2005620554',      // Ejemplo: Nombre
+            apellido: 'entry.1045781291',    // Ejemplo: Apellido
+            edad: 'entry.1065046570',        // Ejemplo: Edad
+            genero: 'entry.1166974658',      // Ejemplo: Género
+            departamento: 'entry.1802447997',// Ejemplo: Departamento
+            provincia: 'entry.1054703597',   // Ejemplo: Provincia
+            distrito: 'entry.839337148',     // Ejemplo: Distrito
+            testimonio: 'entry.1466555417',  // Ejemplo: Testimonio
+            enlace: 'entry.480073285',       // Ejemplo: Enlace
+            email: 'entry.999999999'         // Ejemplo: Email
+        };
         
+        // Datos de ejemplo estáticos (Solo para que la página cargue con información)
+        let infieles = [
+            { nombre: "Jhonatan R.", votos: 25, distrito: "HUACHO" },
+            { nombre: "Brenda T.", votos: 18, distrito: "HUALMAY" },
+            { nombre: "Luis S.", votos: 15, distrito: "SANTA MARÍA" }
+        ]; 
+        let currentOnlineCount = 60; 
+
+        // Funciones de utilidad (Se mantienen las de estilo)
         function actualizarContador() {
             document.getElementById('lista-count').textContent = infieles.length;
         }
@@ -583,42 +600,6 @@
             const fluctuation = Math.floor(Math.random() * 5) - 2; 
             currentOnlineCount = Math.max(1, currentOnlineCount + fluctuation); 
             document.getElementById('online-count').textContent = currentOnlineCount;
-        }
-
-        // === FUNCIÓN PARA CARGAR DATOS PERSISTENTES DESDE AIRTABLE (GET) ===
-        async function cargarInfielesDesdeAirtable() {
-            const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
-            
-            try {
-                const response = await fetch(url, {
-                    headers: {
-                        'Authorization': `Bearer ${AIRTABLE_API_KEY}`
-                    }
-                });
-                
-                if (!response.ok) {
-                    console.error("Respuesta HTTP fallida:", response.status, await response.text());
-                    // Manejar la situación de 404/401 si las credenciales son malas al cargar.
-                    return; 
-                }
-                
-                const data = await response.json();
-                
-                // Mapear los registros de Airtable a la estructura de tu matriz 'infieles'
-                infieles = data.records.map(record => ({
-                    id: record.id, // ID del registro para actualizar (PATCH)
-                    nombre: record.fields.Nombre_Completo || 'Sin Nombre',
-                    votos: record.fields.Votos || 0, 
-                    distrito: record.fields.Distrito || 'Desconocido'
-                }));
-
-                // Una vez cargados, actualizamos la interfaz
-                actualizarContador();
-                renderizarTop3();
-                
-            } catch (error) {
-                console.error("Error al cargar datos de Airtable:", error);
-            }
         }
 
         function renderizarTop3() {
@@ -672,6 +653,7 @@
                 }
             }
         }
+
         function verificarAceptacionLegal() {
             const legal1 = document.getElementById('legal-1').checked;
             const legal2 = document.getElementById('legal-2').checked;
@@ -702,118 +684,84 @@
             }
         }
         
-        // === FUNCIÓN PARA ENVIAR/ACTUALIZAR DATOS EN AIRTABLE (POST/PATCH) ===
+        // ***************************************************************
+        // FUNCIÓN CLAVE: AQUÍ SE ENVÍA LA INFORMACIÓN A GOOGLE FORMS
+        // ***************************************************************
         async function submitReporteCompleto() {
             if (document.getElementById('publish-btn').disabled) {
                  alert("Por favor, acepta ambos Términos Legales para habilitar la publicación.");
                  return;
             }
-            const nombre = document.getElementById('report-nombre').value.trim();
-            const apellido = document.getElementById('report-apellido').value.trim();
-            const distrito = document.getElementById('report-distrito').value;
-            const edad = document.getElementById('report-edad').value;
-            const genero = document.getElementById('report-genero').value;
-            // Testimonio ya no es obligatorio
-            const testimonio = document.getElementById('report-testimonio').value.trim();
-            const enlace = document.getElementById('report-enlace').value.trim();
-            const email = document.getElementById('report-email').value.trim();
             
-            // Generar nombre completo y normalizar para búsqueda
-            const nombreCompleto = `${nombre} ${apellido}`;
-            const nombreBusqueda = nombreCompleto.toLowerCase();
-            
-            // VALIDACIÓN ACTUALIZADA: Solo campos obligatorios marcados con *
-            if (!nombre || !apellido || distrito === 'Selecciona distrito') {
-                alert("Por favor, rellena los campos obligatorios (Nombre, Apellido y Distrito) marcados con (*).");
+            if (FORM_ACTION_URL === 'YOUR_GOOGLE_FORM_ACTION_URL_HERE') {
+                alert("⚠️ Error de Configuración: Debes seguir las instrucciones y reemplazar 'YOUR_GOOGLE_FORM_ACTION_URL_HERE' en el código. El reporte NO se guardará públicamente hasta que lo hagas.");
                 return;
             }
 
-            // 1. Verificar si el infiel ya existe en la lista cargada de Airtable
-            let existingInfiel = infieles.find(i => 
-                i.nombre.toLowerCase() === nombreBusqueda && i.distrito === distrito
-            );
-
-            const base_url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+            const nombre = document.getElementById('report-nombre').value.trim();
+            const apellido = document.getElementById('report-apellido').value.trim();
+            const distrito = document.getElementById('report-distrito').value;
+            const testimonio = document.getElementById('report-testimonio').value.trim();
+            
+            if (!nombre || !apellido || distrito === '' || testimonio.length < 10) {
+                alert("Por favor, rellena todos los campos obligatorios (*). El testimonio debe tener al menos 10 caracteres.");
+                return;
+            }
+            
+            // 1. Crear el objeto con los datos del formulario, usando los IDs de Google Forms
+            const formData = new FormData();
+            formData.append(FIELD_IDS.nombre, nombre);
+            formData.append(FIELD_IDS.apellido, apellido);
+            formData.append(FIELD_IDS.edad, document.getElementById('report-edad').value);
+            formData.append(FIELD_IDS.genero, document.getElementById('report-genero').value);
+            formData.append(FIELD_IDS.departamento, document.getElementById('report-departamento').value);
+            formData.append(FIELD_IDS.provincia, document.getElementById('report-provincia').value);
+            formData.append(FIELD_IDS.distrito, distrito);
+            formData.append(FIELD_IDS.testimonio, testimonio);
+            formData.append(FIELD_IDS.enlace, document.getElementById('report-enlace').value.trim());
+            formData.append(FIELD_IDS.email, document.getElementById('report-email').value.trim());
+            
+            const publishBtn = document.getElementById('publish-btn');
+            publishBtn.textContent = '⏳ Publicando...';
+            publishBtn.disabled = true;
 
             try {
-                let response;
-                let isUpdate = false;
-                
-                if (existingInfiel) {
-                    // =========================
-                    // A. ACTUALIZAR (PATCH): Ya existe, solo incrementamos el voto
-                    // =========================
-                    isUpdate = true;
-                    const nuevosVotos = existingInfiel.votos + 1;
-                    const dataToUpdate = {
-                        "fields": {
-                            "Votos": nuevosVotos 
-                        }
-                    };
+                // 2. Enviar los datos al endpoint de Google Forms
+                const response = await fetch(FORM_ACTION_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // Necesario para evitar errores de CORS con Google Forms
+                });
 
-                    // Usamos PATCH para actualizar un registro específico (requiere el ID en la URL)
-                    response = await fetch(`${base_url}/${existingInfiel.id}`, { 
-                        method: 'PATCH',
-                        headers: {
-                            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(dataToUpdate) 
-                    });
-
-                } else {
-                    // =========================
-                    // B. CREAR (POST): Es un nuevo infiel
-                    // =========================
-                    const dataToCreate = {
-                        "fields": {
-                            // Asegúrate que los nombres de los campos (ej: 'Nombre_Completo') coincidan con los de tu tabla en Airtable
-                            "Nombre_Completo": nombreCompleto, 
-                            "Distrito": distrito,
-                            "Edad": parseInt(edad) || null,
-                            "Genero": genero,
-                            // Testimonio puede ser vacío
-                            "Testimonio": testimonio, 
-                            "Enlace_Evidencia": enlace,
-                            "Email_Contacto": email,
-                            "Votos": 1 // Inicializar con un voto
-                        }
-                    };
-                    
-                    // Usamos POST para crear un nuevo registro
-                    response = await fetch(base_url, {
-                        method: 'POST', 
-                        headers: {
-                            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(dataToCreate)
-                    });
-                }
+                // Como usamos 'no-cors', la respuesta siempre es OK, así que solo confirmamos el envío
                 
-                if (!response.ok) {
-                    // Si hay un error, el error 404 será capturado aquí
-                    throw new Error(`Error al enviar el reporte: ${response.status} - ${await response.text()}`);
-                }
+                // Si el formulario fue exitoso, actualizamos la simulación local
+                infieles.push({
+                    nombre: `${nombre} ${apellido}`,
+                    votos: 1, 
+                    distrito: distrito
+                });
                 
-                // 2. Si la publicación fue exitosa, recargamos toda la lista
-                await cargarInfielesDesdeAirtable(); 
-                
+                actualizarContador();
+                renderizarTop3();
                 cerrarModal('reportar-modal');
-                alert(`¡Gracias! El reporte de ${nombreCompleto} ha sido ${isUpdate ? 'actualizado' : 'enviado'} y se ha actualizado el conteo de votos.`);
-                
-                // 3. Limpieza del formulario y verificación
-                document.getElementById('report-form').reset();
-                document.getElementById('testimonio-char-count').textContent = '0 caracteres (opcional)';
-                document.getElementById('file-selection-info').textContent = 'Elegir archivos';
-                verificarAceptacionLegal(); 
+                alert(`¡Éxito! El reporte de ${nombre} ${apellido} ha sido enviado a la base de datos pública. ✅`);
 
             } catch (error) {
-                console.error("Error en la publicación:", error);
-                alert("Ocurrió un error al intentar publicar el reporte. Inténtalo de nuevo. Detalle: " + error.message);
+                console.error('Error al enviar el reporte:', error);
+                alert('⚠️ Error: No se pudo conectar con la base de datos. Por favor, verifica tu configuración de Google Forms.');
+            } finally {
+                // Restaurar el formulario y el botón
+                document.getElementById('report-form').reset();
+                document.getElementById('testimonio-char-count').textContent = '0 caracteres (mínimo 10)';
+                verificarAceptacionLegal(); 
+                publishBtn.textContent = '🔥 Publicar Reporte de Infidelidad';
             }
         }
-        
+        // ***************************************************************
+        // FIN DE FUNCIÓN CLAVE
+        // ***************************************************************
+
         document.getElementById('search-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 const searchTerm = this.value.trim().toLowerCase();
@@ -824,7 +772,7 @@
                         document.getElementById('not-found-name-display').textContent = `"${searchTerm}" no aparece en nuestra base de datos`;
                         document.getElementById('not-found-modal').style.display = "block";
                     } else {
-                        alert(`¡${searchTerm} ENCONTRADO/A! Mostrando resultados en la lista...`);
+                        alert(`¡${searchTerm} ENCONTRADO/A! Si el listado fuera real, lo verías ahora mismo.`);
                     }
                 }
             }
@@ -832,22 +780,10 @@
         
         document.getElementById('report-testimonio').addEventListener('input', function() {
             const currentLength = this.value.length;
-            // Etiqueta para reflejar que es opcional
-            document.getElementById('testimonio-char-count').textContent = `${currentLength} caracteres (opcional)`;
+            document.getElementById('testimonio-char-count').textContent = `${currentLength} caracteres (mínimo 10)`;
         });
 
-        document.getElementById('file-upload').addEventListener('change', function() {
-            let files = this.files;
-            let infoElement = document.getElementById('file-selection-info');
-            if (files.length === 0) {
-                infoElement.textContent = 'Elegir archivos';
-            } else if (files.length === 1) {
-                infoElement.textContent = files[0].name;
-            } else {
-                infoElement.textContent = `${files.length} archivos seleccionados`;
-            }
-        });
-
+        // Eventos de la Modal
         const reportarModal = document.getElementById("reportar-modal");
         const reportarBtn = document.getElementById("reportar-btn");
 
@@ -868,11 +804,9 @@
                 cerrarModal('not-found-modal');
             }
         }
-
         document.addEventListener('DOMContentLoaded', () => {
-            // Cargar los datos desde Airtable al inicio
-            cargarInfielesDesdeAirtable(); 
-            
+            actualizarContador();
+            renderizarTop3();
             actualizarOnlineCount();
             setInterval(actualizarOnlineCount, 15000); 
         });
